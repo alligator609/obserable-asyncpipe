@@ -8,9 +8,6 @@ import { PlantService } from './service/plant.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title(title: any) {
-    throw new Error('Method not implemented.');
-  }
   pizzas: Pizza[] =[] ;
   pizzas$: Observable<Pizza[]> = new Observable<Pizza[]>();  
 
@@ -32,7 +29,22 @@ export class AppComponent implements OnInit {
         }
       );
     });  */
-    this.pizzas$ = Observable.create((observer :any)=> {
+      this.pizzas$ = new Observable<Pizza[]> (observer => {
+      this.plantService.get().subscribe(
+        (data: any) => {
+          this.pizzas = data.data;
+          observer.next(this.pizzas);
+        },
+        (error: any) => {
+          return error;
+        },
+        () => {
+          return this.pizzas;
+        }
+      );
+    });
+ 
+   /*  this.pizzas$ = Observable.create((observer :any)=> {
       this.plantService.get().subscribe(
         (data: any) => {
           this.pizzas = data.data;
@@ -45,10 +57,11 @@ export class AppComponent implements OnInit {
           observer.complete();
         }
       );
-    });
+    }); */
+
 
    // this.pizzas$ = pizza;
-}
+  }
 }
 interface Pizza {
   ID:string;
