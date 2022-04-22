@@ -8,6 +8,9 @@ import { PlantService } from './service/plant.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  title(title: any) {
+    throw new Error('Method not implemented.');
+  }
   pizzas: Pizza[] =[] ;
   pizzas$: Observable<Pizza[]> = new Observable<Pizza[]>();  
 
