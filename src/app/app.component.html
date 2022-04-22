@@ -1,0 +1,5 @@
+<ul>
+    <li *ngFor="let pizza of pizzas$ |async; index as i">
+        {{ i + 1 }}. {{ pizza.PlantName }}
+    </li>
+</ul>
